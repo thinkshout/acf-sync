@@ -1,0 +1,11 @@
+{
+    "name": "thinkshout/acf-sync",
+    "description": "ACF file based syncing for ThinkShout Base Build projects",
+    "type": "wordpress-plugin",
+    "suggest": {
+        "wpengine/advanced-custom-fields-pro": "This plugin is an enhancement for ACF. It is recommended you use composer to install ACF Pro."
+    },
+    "license": [
+        "GPL-3.0+"
+    ]
+}
