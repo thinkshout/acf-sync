@@ -119,8 +119,6 @@ add_filter( 'acf/settings/save_json', 'acf_sync_save_json' );
  * @return string[]
  */
 function acf_sync_smart_save_paths( $paths, $acf ) {
-	// By default, include the active theme's acf-json directory:
-	$paths[] = get_stylesheet_directory() . '/acf-json';
 	$file_name = acf_sync_json_save_file_name( $acf['key'] . '.json', $acf, null );
 	// ACF location configuration for specific post types.
 	if ( isset( $acf['location'][0][0] ) && $acf['location'][0][0]['operator'] === '==' ) {
@@ -171,6 +169,8 @@ function acf_sync_smart_save_paths( $paths, $acf ) {
 
 		}
 	}
+	// By default, include the active theme's acf-json directory:
+	$paths[] = get_stylesheet_directory() . '/acf-json';
 
 	return $paths;
 }
