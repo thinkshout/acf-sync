@@ -201,6 +201,7 @@ function _thinkshout_acf_generate_controller_paths( $base_path, $file_name, $che
 	// We also check the subtheme, if different.
 	if ( $stylesheet_directory !== $template_directory ) {
 		$paths[] = $stylesheet_directory . $base_path;
+		$paths[] = $stylesheet_directory . $base_path . '/controller';
 	}
 	if ( $check_base_path ) {
 		$valid = false;
@@ -214,7 +215,6 @@ function _thinkshout_acf_generate_controller_paths( $base_path, $file_name, $che
 		}
 	}
 	foreach ( $paths as $option => &$path_candidate ) {
-		$path_candidate .= '/controller';
 		if ( is_dir( "$path_candidate" ) ) {
 			if ( is_file( "$path_candidate/$file_name" ) ) {
 				// Existing file found, this is the path we want.
