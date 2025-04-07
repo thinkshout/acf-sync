@@ -54,6 +54,7 @@ function acf_sync_load_json( $paths ) {
 		// directory structure instead. This has the added benefit of working
 		// for other Single Directory Components more easily.
 		foreach ( glob( "$candidate/*", GLOB_ONLYDIR ) as $directory ) {
+			$paths[] = "$directory";
 			$paths[] = "$directory/controller";
 		}
 	}
@@ -125,9 +126,15 @@ function acf_sync_smart_save_paths( $paths, $acf ) {
 		switch ( $acf['location'][0][0]['param'] ) {
 			case 'block':
 				// The value is of the form: "acf/BLOCKNAME--controller".
-				preg_match( '/acf\/(.*)--controller/', $acf['location'][0][0]['value'], $matches );
+				preg_match( '/acf\/(.*)/', $acf['location'][0][0]['value'], $matches );
 				if ( isset( $matches[1] ) ) {
 					$paths = _thinkshout_acf_generate_controller_paths( '/views/organisms/blocks/' . $matches[1], $file_name );
+				} else {
+					// The value is of the form: "acf/BLOCKNAME--controller".
+					preg_match( '/acf\/(.*)--controller/', $acf['location'][0][0]['value'], $matches );
+					if ( isset( $matches[1] ) ) {
+						$paths = _thinkshout_acf_generate_controller_paths( '/views/organisms/blocks/' . $matches[1], $file_name );
+					}
 				}
 				break;
 
