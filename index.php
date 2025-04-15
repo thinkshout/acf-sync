@@ -42,11 +42,13 @@ function acf_sync_load_json( $paths ) {
 
 	// Pull in fields from the child theme. These will override the parent
 	// theme if they have matching IDs.
-	$paths[] = get_stylesheet_directory() . '/acf-json';
+	if ( get_stylesheet_directory() !== get_template_directory() ) {
+		$paths[] = get_stylesheet_directory() . '/acf-json';
+	}
 
 	$candidates = array(
-		get_template_directory() . '/content-types/',
-		get_template_directory() . '/views/organisms/blocks/',
+		get_template_directory() . '/content-types',
+		get_template_directory() . '/views/organisms/blocks',
 	);
 	foreach ( $candidates as $candidate ) {
 		// Note that we can't use get_post_types here, as it only returns the
